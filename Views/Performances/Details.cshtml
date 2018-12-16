@@ -1,0 +1,51 @@
+﻿@model EmployeeProject.Models.EvaluationFolder.Performance
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Performance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.EvaluationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.EvaluationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OveralRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OveralRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEvaluated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEvaluated)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

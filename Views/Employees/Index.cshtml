@@ -1,0 +1,95 @@
+﻿@model IEnumerable<EmployeeProject.Models.Employee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Insurance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RemaingDaysOfLeave)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Salary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Account.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ContactDetails.MobilePhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Department.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PersonalDetails.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WorkContract.DateOfHire)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Insurance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RemaingDaysOfLeave)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Salary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Account.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactDetails.MobilePhone)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Department.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PersonalDetails.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WorkContract.DateOfHire)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.ID }) |
+            @Html.ActionLink("RequestLeave","RequestLeave", new { id = item.ID})
+        </td>
+    </tr>
+}
+
+</table>

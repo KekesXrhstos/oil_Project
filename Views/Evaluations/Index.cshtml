@@ -1,0 +1,117 @@
+﻿@model EmployeeProject.ViewModel.EvaluationsData
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            StartDate
+        </th>
+        <th>
+            EndDate
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Evaluations)
+    {
+
+        string selectedRow = "";
+        if (item.EvaluationID == ViewBag.EvaluationID)
+        {
+            selectedRow = "success";
+        }
+
+
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.StartEvaluationDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EndEvaluationDate)
+            </td>
+
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.EvaluationID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.EvaluationID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.EvaluationID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.EvaluationID })
+            </td>
+        </tr>
+    }
+
+</table>
+@if (Model.Performances != null)
+{
+    <h3>Performances</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>Employee Name</th>
+            <th>Date</th>
+            <th>Rating</th>
+        </tr>
+
+        @foreach (var item in Model.Performances)
+        {
+            string selectedRow = "";
+            if (item.ID == ViewBag.PerformanceID)
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.ActionLink("Select", "Index", new { performanceID = item.ID })
+                </td>
+                <td>
+                    @item.Employee.Name
+                </td>
+                <td>
+                    @item.DateEvaluated
+                </td>
+                <td>
+                    @item.OveralRating
+                </td>
+            </tr>
+        }
+    </table>
+    
+    if (Model.Questions != null)
+    {
+        <h3>Questions</h3>
+        <table class="table table-bordered">
+            <tr>
+                <th>Question</th>
+                <th>Answer</th>
+            </tr>
+            @foreach (var item in Model.Questions)
+            {
+                <tr>
+                    <td>
+                        @item.Text
+                    </td>
+                    <td>
+                        @if (item.Answer.QuestionAnswer == null)
+                        {
+                            @item.Answer.Text
+                        }
+                        else
+                        {
+                            @item.Answer.QuestionAnswer
+                        }
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+}
+
+
+

@@ -1,0 +1,57 @@
+﻿@model EmployeeProject.Models.EvaluationFolder.Performance
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Performance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Employee.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Employee.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Evaluation.EvaluationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Evaluation.EvaluationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OveralRating)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OveralRating)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateEvaluated)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateEvaluated)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

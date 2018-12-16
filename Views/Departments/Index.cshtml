@@ -1,0 +1,196 @@
+﻿@model EmployeeProject.ViewModels.DepartmentData
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Department
+        </th>
+        <th>
+            Address
+        </th>
+    </tr>
+
+    @foreach (var item in Model.Departments)
+    {
+        string selectedRow = "";
+        if (item.ID == ViewBag.DepartmentID)
+        {
+            selectedRow = "success";
+        }
+        <tr class="@selectedRow">
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.ActionLink("Select", "Index", new { id = item.ID }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+            </td>
+        </tr>
+    }
+</table>
+@if (Model.WeeklySchedules != null)
+{
+    <h3>Weekly Schedule Sorting By  first Date of the Week</h3>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Start Of the Week</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.WeeklySchedules)
+        {
+            string selectedRow = "";
+            if (item.ID == ViewBag.WeeklyScheduleID)
+            {
+                selectedRow = "success";
+            }
+
+            <tr class="@selectedRow">
+                <td>
+                    @item.StartOfWeek
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { WeeklyScheduleID = item.ID })                   
+                </td>
+            </tr>
+
+        }
+    </table>
+}
+@if(Model.WorkDays != null)
+{
+    <h3>WorkDays</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Day</th>
+            <th>Date</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.WorkDays)
+        {
+            string selectedRow = "";
+            if (item.ID == ViewBag.WorkDayID)
+            {
+                selectedRow = "success";
+            }
+
+
+            <tr class="@selectedRow">
+                <td>
+                    @item.Day
+                </td>
+                <td>
+                    @item.Date
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { WorkDayID = item.ID, weeklyScheduleID = ViewBag.WeeklyScheduleID })
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if(Model.Shifts != null)
+{
+    <h3>Shifts</h3>
+    <table class="table table-bordered">
+        <tr>
+            <th>Shift</th>
+            <th>Duration of shifts</th>
+            <th></th>
+        </tr>
+        @foreach(var item in Model.Shifts)
+        {
+            string selectedRow = "";
+            if(item.ID == ViewBag.ShiftID)
+            {
+                selectedRow = "success";
+            }
+            <tr>
+                <td>
+                    @item.DayShift
+                </td>
+                <td>
+                    @item.ShiftDurationHours
+                </td>
+                <td>
+                    @Html.ActionLink("Select","Index",new { ShiftID = item.ID, WorkDayID = ViewBag.WorkDayID, weeklyScheduleID = ViewBag.WeeklyScheduleID })
+                </td>
+            </tr>
+        }
+    </table>
+}
+@if(Model.Posts != null)
+{
+    <h3>Posts</h3>
+    <table class="table, table-bordered">
+        <tr>
+            <th>Full Name</th>
+            <th>Role</th>
+            <th>Department</th>
+            <th></th>
+        </tr>
+        @foreach(var item in Model.Posts)
+        {
+            string selectedRow = "";
+            if(item.ID == ViewBag.PostID)
+            {
+                selectedRow = "success";
+            }
+            <tr>
+                <td>
+                    @item.Employee.FullName
+                </td>
+                <td>
+                    @item.Employee.WorkRole
+                </td>
+                <td>
+                    @item.Employee.Department.Name
+                </td>
+                <td>
+                    @Html.ActionLink("Select", "Index", new { postID = item.ID, ShiftID = ViewBag.ShiftID, WorkDayID = ViewBag.WorkDayID, weeklyScheduleID = ViewBag.WeeklyScheduleID })
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if(Model.Assignments != null)
+{
+    <h3>Assignments</h3>
+    <table class="table, table-bordered">
+        <tr>
+            <th>Description</th>
+            <th>Due Date</th>
+            <th>Progress</th>
+        </tr>
+        @foreach(var item in Model.Assignments)
+        {
+            <tr>
+                <td>
+                    @item.Project.Description
+                </td>
+                <td>
+                    @item.Project.DueDate
+                </td>
+                <td>
+                    @item.Project.Progress
+                </td>
+            </tr>
+        }
+    </table>
+}
